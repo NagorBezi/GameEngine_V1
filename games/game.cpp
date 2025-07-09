@@ -25,7 +25,7 @@ void init()
     0, 1, 2
   };
 
-  
+  Object triangle (verts, indices, false, 1);
 
 }
 
