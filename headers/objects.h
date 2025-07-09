@@ -8,13 +8,14 @@
 class Object
 {
 public:
-  unsigned int gVAO, gVBO, gEBO;
-  int num_of_verts;
-  float vertices[];
-  unsigned int indices[];
-  Object (bool has_texture, int count)
+  unsigned int VAO, VBO, EBO;
+  int number_of_verts;
+
+  Object (float vertices[], int no_of_verts, 
+    unsigned int indices[], int no_of_indices, 
+    bool has_texture, int count)
   {
-    unsigned int VAO, VBO, EBO;
+    number_of_verts = no_of_verts;
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -23,10 +24,10 @@ public:
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, no_of_verts*sizeof(float), vertices, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, no_of_indices*sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
     if ( !has_texture )
     {
@@ -58,8 +59,8 @@ public:
   void render (unsigned int shaderProgram)
   {
     glUseProgram(shaderProgram);
-    glBindVertexArray(gVAO);
-    glDrawElements(GL_TRIANGLES, num_of_verts, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(VAO);
+    glDrawElements(GL_TRIANGLES, number_of_verts, GL_UNSIGNED_INT, 0);
   }
 
 };

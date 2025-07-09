@@ -1,10 +1,11 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <iostream>
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <iostream>
+
 
 int success;
 char infoLog[512];
@@ -38,12 +39,13 @@ unsigned int newVertexShader(std::string path)
   unsigned int vertexShader;
   vertexShader = glCreateShader(GL_VERTEX_SHADER);
   glShaderSource(vertexShader, 1, &vShaderCode, NULL);
+  glCompileShader(vertexShader);
 
   glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
   if ( !success )
   {
     glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-    std::cout << "VERTEX_SHADER_COMPILATION_FAILED: " << infoLog << std::endl;
+    std::cout << "\nVERTEX_SHADER_COMPILATION_FAILED: " << infoLog << std::endl;
     return 1;
   }
 
@@ -80,12 +82,13 @@ unsigned int newFragmentShader(std::string path)
   unsigned int fragmentShader;
   fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(fragmentShader, 1, &fShaderCode, NULL);
+  glCompileShader(fragmentShader);
 
   glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
   if ( !success )
   {
     glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-    std::cout << "FRAGMENT_SHADER_COMPILATION_FAILED: " << infoLog << std::endl;
+    std::cout << "\nFRAGMENT_SHADER_COMPILATION_FAILED: " << infoLog << std::endl;
     return 1;
   }
 

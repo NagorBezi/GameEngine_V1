@@ -1,6 +1,6 @@
 #include "../headers/initWindow.h"
 #include "../headers/shaders.h"
-//#include "../headers/objects.h"
+#include "../headers/objects.h"
 
 
 bool working = true;
@@ -22,29 +22,30 @@ unsigned int indices[] =
   0, 1, 2
 };
 
-//Object triangle (verts, indices, false, 1);
-
-unsigned int ourShader = newShaderProgram(
-  newVertexShader("../shader/shader1.vs"),
-  newFragmentShader("../shader/shader.fs")
-);
 
 void init()
 {
 	std::cout << "\nGAME_INITIALIZED\n" << std::endl;
   //triangle.num_of_verts = 3;
   working = isWindowOK(window);
-  working = isShaderProgramOK(ourShader);
 }
 
 void update()
 {
+  unsigned int ourShader = newShaderProgram(
+    newVertexShader("shader/shader1.vs"),
+    newFragmentShader("shader/shader1.fs")
+  );
 
-  while (!glfwWindowShouldClose(window))
+  working = working = isShaderProgramOK(ourShader);
+
+  Object triangle (verts, 18, indices, 3, false, 1);
+
+  while (!glfwWindowShouldClose(window) and working)
   {
-    bg_color(0.0f, 0.5f, 0.2f, 1.0f);
+    bg_color(0.0f, 0.0f, 0.0f, 1.0f);
 
-    //triangle.render(ourShader);
+    triangle.render(ourShader);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
