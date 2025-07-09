@@ -7,7 +7,6 @@
 class Object
 {
 public:
-  unsigned int shaderProgram;
   unsigned int VAO, VBO, EBO;
   int num_of_verts;
   Object (float vertices[], unsigned int indices[], bool has_texture, int count)
@@ -54,7 +53,7 @@ public:
 
   }
 
-  void render ()
+  void render (unsigned int shaderProgram)
   {
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
