@@ -4,15 +4,17 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+
 class Object
 {
 public:
-  unsigned int VAO, VBO, EBO;
+  unsigned int gVAO, gVBO, gEBO;
   int num_of_verts;
-  Object (float vertices[], unsigned int indices[], bool has_texture, int count)
+  float vertices[];
+  unsigned int indices[];
+  Object (bool has_texture, int count)
   {
-
-    num_of_verts = sizeof(vertices) / sizeof(float);
+    unsigned int VAO, VBO, EBO;
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -56,7 +58,7 @@ public:
   void render (unsigned int shaderProgram)
   {
     glUseProgram(shaderProgram);
-    glBindVertexArray(VAO);
+    glBindVertexArray(gVAO);
     glDrawElements(GL_TRIANGLES, num_of_verts, GL_UNSIGNED_INT, 0);
   }
 
