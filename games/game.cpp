@@ -26,6 +26,10 @@ void init()
   };
 
   Object triangle (verts, indices, false, 1);
+  triangle.shaderProgram = newShaderProgram(
+    newVertexShader("../shader/shader1.vs"), 
+    newFragmentShader("../shader/shader1.fs")
+  );
 
 }
 

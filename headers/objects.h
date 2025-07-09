@@ -54,7 +54,7 @@ public:
 
   }
 
-  void render (unsigned int shaderProgram)
+  void render ()
   {
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
