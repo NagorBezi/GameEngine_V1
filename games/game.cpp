@@ -33,10 +33,10 @@ void init()
 
 void update()
 {
-  unsigned int ourShader = newShaderProgram(
-    newVertexShader("shader/shader1.vs"),
-    newFragmentShader("shader/shader1.fs")
-  );
+	unsigned int ourShader = newShaderProgram(
+  	newVertexShader("shader/shader1.vs"),
+  	newFragmentShader("shader/shader1.fs")
+	);
 
   working = isShaderProgramOK(ourShader);
 
