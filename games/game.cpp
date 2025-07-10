@@ -31,8 +31,9 @@ void init()
   working = isWindowOK(window);
 }
 
-void update()
+int main()
 {
+  // PRE-MAIN LOOP
 	unsigned int ourShader = newShaderProgram(
   	newVertexShader("shader/shader1.vs"),
   	newFragmentShader("shader/shader2.fs")
@@ -42,6 +43,7 @@ void update()
 
   Object rect (verts, 32, indices, 6, true, 1);
 
+  // MAIN LOOP
   while (!glfwWindowShouldClose(window) and working)
   {
     bg_color(0.0f, 0.0f, 0.0f, 1.0f);
@@ -52,21 +54,7 @@ void update()
     glfwPollEvents();
   }
 
+  glDeleteProgram(ourShader);
   glfwTerminate();
   
-}
-
-int main()
-{
-
-  init();
-  if ( !working )
-  {
-    return -1;
-  }
-
-  update();
-
-  return 0;
-
 }
