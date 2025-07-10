@@ -10,12 +10,13 @@ class Object
 public:
   unsigned int VAO, VBO, EBO;
   int number_of_verts;
+  int number_of_indices;
 
   Object (float vertices[], int no_of_verts, 
     unsigned int indices[], int no_of_indices, 
     bool has_texture, int count)
   {
-    number_of_verts = no_of_verts;
+    number_of_indices = no_of_indices;
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -31,6 +32,7 @@ public:
 
     if ( !has_texture )
     {
+      number_of_verts = no_of_verts/6;
       // Position attribute
       glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
       glEnableVertexAttribArray(0);
@@ -40,11 +42,12 @@ public:
     }
     else
     {
+      number_of_verts = no_of_verts/8;
       // Position attribute
-      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
+      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0);
       glEnableVertexAttribArray(0);
       // Color attribute
-      glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3*sizeof(float)));
+      glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(3*sizeof(float)));
       glEnableVertexAttribArray(1);
       // Texture attribute
       glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(6*sizeof(float)));
@@ -60,7 +63,7 @@ public:
   {
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, number_of_verts, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, number_of_indices, GL_UNSIGNED_INT, 0);
   }
 
 };

@@ -12,21 +12,22 @@ GLFWwindow* window = newWindow(SCREEN_HEIGHT, SCREEN_WIDTH, Title);
 
 float verts[] =
 {
-  -0.5f,  0.5f,  0.0f,  1.0f, 0.0f, 0.0f,
-  -0.5f, -0.5f,  0.0f,  0.0f, 1.0f, 0.0f,
-   0.5f, -0.5f,  0.0f,  0.0f, 0.0f, 1.0f
+  -0.5f,  0.5f,  0.0f,  1.0f, 0.5f, 0.5f,
+  -0.5f, -0.5f,  0.0f,  0.5f, 1.0f, 0.5f,
+   0.5f, -0.5f,  0.0f,  0.5f, 0.5f, 1.0f,
+   0.5f,  0.5f,  0.0f,  1.0f, 0.5f, 1.0f
 };
 
 unsigned int indices[] = 
 {
-  0, 1, 2
+  0, 1, 2,
+  0, 2, 3
 };
 
 
 void init()
 {
 	std::cout << "\nGAME_INITIALIZED\n" << std::endl;
-  //triangle.num_of_verts = 3;
   working = isWindowOK(window);
 }
 
@@ -37,9 +38,9 @@ void update()
     newFragmentShader("shader/shader1.fs")
   );
 
-  working = working = isShaderProgramOK(ourShader);
+  working = isShaderProgramOK(ourShader);
 
-  Object triangle (verts, 18, indices, 3, false, 1);
+  Object triangle (verts, 24, indices, 6, false, 1);
 
   while (!glfwWindowShouldClose(window) and working)
   {
