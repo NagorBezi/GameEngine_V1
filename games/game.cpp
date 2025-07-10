@@ -2,7 +2,6 @@
 #include "../headers/shaders.h"
 #include "../headers/objects.h"
 
-
 bool working = true;
 
 const unsigned int SCREEN_HEIGHT=1200, SCREEN_WIDTH=900;
@@ -12,16 +11,17 @@ GLFWwindow* window = newWindow(SCREEN_HEIGHT, SCREEN_WIDTH, Title);
 
 float verts[] =
 {
-  -0.5f,  0.5f,  0.0f,  1.0f, 0.5f, 0.5f,
-  -0.5f, -0.5f,  0.0f,  0.5f, 1.0f, 0.5f,
-   0.5f, -0.5f,  0.0f,  0.5f, 0.5f, 1.0f,
-   0.5f,  0.5f,  0.0f,  1.0f, 0.5f, 1.0f
+  -0.5f,  0.5f,  0.0f,   1.0f, 0.5f, 0.5f,   0.0f, 1.0f,
+  -0.5f, -0.5f,  0.0f,   0.5f, 1.0f, 0.5f,   0.0f, 0.0f,
+   0.5f, -0.5f,  0.0f,   0.5f, 0.5f, 1.0f,   1.0f, 0.0f,
+   0.5f,  0.5f,  0.0f,   1.0f, 0.5f, 1.0f,   1.0f, 1.0f
 };
+
 
 unsigned int indices[] = 
 {
   0, 1, 2,
-  0, 2, 3
+	0, 2, 3
 };
 
 
@@ -35,18 +35,18 @@ void update()
 {
 	unsigned int ourShader = newShaderProgram(
   	newVertexShader("shader/shader1.vs"),
-  	newFragmentShader("shader/shader1.fs")
+  	newFragmentShader("shader/shader2.fs")
 	);
 
   working = isShaderProgramOK(ourShader);
 
-  Object triangle (verts, 24, indices, 6, false, 1);
+  Object rect (verts, 32, indices, 6, true, 1);
 
   while (!glfwWindowShouldClose(window) and working)
   {
     bg_color(0.0f, 0.0f, 0.0f, 1.0f);
 
-    triangle.render(ourShader);
+    rect.render(ourShader);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
