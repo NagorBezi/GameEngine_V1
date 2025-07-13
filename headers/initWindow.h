@@ -8,5 +8,6 @@
 GLFWwindow* newWindow(const unsigned int SCREEN_HEIGHT, const unsigned int SCREEN_WIDTH, const char* Title);
 void bg_color(float red, float green, float blue, float alpha);
 bool isWindowOK(GLFWwindow* window);
+void useWindow (GLFWwindow* window);
 
 #endif

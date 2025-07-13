@@ -28,12 +28,15 @@ unsigned int indices[] =
 void init()
 {
 	std::cout << "\nGAME_INITIALIZED\n" << std::endl;
+  useWindow(window);
   working = isWindowOK(window);
 }
 
 int main()
 {
+  // INIT FUNCTION
   init();
+
   // PRE-MAIN LOOP
 	unsigned int ourShader = newShaderProgram(
   	newVertexShader("shader/shader1.vs"),

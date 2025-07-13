@@ -26,8 +26,6 @@ bool isWindowOK(GLFWwindow* window)
     glfwTerminate();
     return false;
   }
-
-  glfwMakeContextCurrent(window);
   
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
   {
@@ -44,3 +42,7 @@ void bg_color(float red, float green, float blue, float alpha = 1.0f)
   glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void useWindow (GLFWwindow* window)
+{
+  glfwMakeContextCurrent(window);
+}
