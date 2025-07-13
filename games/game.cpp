@@ -33,18 +33,24 @@ void init()
 
 int main()
 {
+  init();
   // PRE-MAIN LOOP
 	unsigned int ourShader = newShaderProgram(
   	newVertexShader("shader/shader1.vs"),
-  	newFragmentShader("shader/shader2.fs")
+  	newFragmentShader("shader/shader1.fs")
 	);
 
   working = isShaderProgramOK(ourShader);
 
   Object rect (verts, 32, indices, 6, true, 1);
 
+  if ( !working )
+  {
+    return -1;
+  }
+
   // MAIN LOOP
-  while (!glfwWindowShouldClose(window) and working)
+  while (!glfwWindowShouldClose(window))
   {
     bg_color(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -56,5 +62,7 @@ int main()
 
   glDeleteProgram(ourShader);
   glfwTerminate();
+
+  return 0;
   
 }
