@@ -1,6 +1,8 @@
 #include "../headers/initWindow.h"
 #include "../headers/shaders.h"
 #include "../headers/objects.h"
+#include "../headers/textures.h"
+
 
 bool working = true;
 
@@ -28,8 +30,12 @@ unsigned int indices[] =
 void init()
 {
 	std::cout << "\nGAME_INITIALIZED\n" << std::endl;
+
   useWindow(window);
   working = isWindowOK(window);
+
+  setTexWrapMethod(1);
+  setTexFilterMethod(1);
 }
 
 int main()

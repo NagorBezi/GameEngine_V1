@@ -1,4 +1,9 @@
 #! /usr/bin/bash
 
-g++ games/game.cpp engine/initWindow.cpp engine/shaders.cpp glad.c -ldl -lglfw -o program
+g++ glad.c\
+  games/game.cpp\
+  engine/initWindow.cpp\
+  engine/shaders.cpp\
+  engine/textures.cpp\
+  -ldl -lglfw -o program
 
