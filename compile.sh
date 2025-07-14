@@ -5,5 +5,6 @@ g++ glad.c\
   engine/initWindow.cpp\
   engine/shaders.cpp\
   engine/textures.cpp\
+  engine/stb_image_implementation.cpp\
   -ldl -lglfw -o program
 

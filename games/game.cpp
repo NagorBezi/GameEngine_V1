@@ -35,7 +35,7 @@ void init()
   working = isWindowOK(window);
 
   setTexWrapMethod(1);
-  setTexFilterMethod(1);
+  setTexFilterMethod(2);
 }
 
 int main()
@@ -46,10 +46,12 @@ int main()
   // PRE-MAIN LOOP
 	unsigned int ourShader = newShaderProgram(
   	newVertexShader("shader/shader1.vs"),
-  	newFragmentShader("shader/shader1.fs")
+  	newFragmentShader("shader/shader2.fs")
 	);
 
   working = isShaderProgramOK(ourShader);
+
+  unsigned int texture = genTexture("textures/sigil.png");
 
   Object rect (verts, 32, indices, 6, true, 1);
 
@@ -63,7 +65,7 @@ int main()
   {
     bg_color(0.0f, 0.0f, 0.0f, 1.0f);
 
-    rect.render(ourShader);
+    rect.render_T(ourShader, texture);
 
     glfwSwapBuffers(window);
     glfwPollEvents();

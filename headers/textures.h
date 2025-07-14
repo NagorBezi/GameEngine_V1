@@ -8,5 +8,6 @@
 
 void setTexWrapMethod (int method);
 void setTexFilterMethod (int method);
+unsigned int genTexture (const char* image_path);
 
 #endif

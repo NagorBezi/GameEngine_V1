@@ -7,10 +7,10 @@
 
 class Object
 {
-public:
   unsigned int VAO, VBO, EBO;
-  int number_of_verts;
   int number_of_indices;
+
+public:
 
   Object (float vertices[], int no_of_verts, 
     unsigned int indices[], int no_of_indices, 
@@ -32,7 +32,6 @@ public:
 
     if ( !has_texture )
     {
-      number_of_verts = no_of_verts/6;
       // Position attribute
       glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
       glEnableVertexAttribArray(0);
@@ -42,7 +41,6 @@ public:
     }
     else
     {
-      number_of_verts = no_of_verts/8;
       // Position attribute
       glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0);
       glEnableVertexAttribArray(0);
@@ -62,6 +60,14 @@ public:
   void render (unsigned int shaderProgram)
   {
     glUseProgram(shaderProgram);
+    glBindVertexArray(VAO);
+    glDrawElements(GL_TRIANGLES, number_of_indices, GL_UNSIGNED_INT, 0);
+  }
+
+  void render_T (unsigned int shaderProgram, unsigned int texture)
+  {
+    glUseProgram(shaderProgram);
+    glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, number_of_indices, GL_UNSIGNED_INT, 0);
   }
