@@ -46,3 +46,13 @@ void useWindow (GLFWwindow* window)
 {
   glfwMakeContextCurrent(window);
 }
+
+void framebuffer_size_callback (GLFWwindow* window, int width, int height)
+{
+  glViewport(0, 0, width, height);
+}
+
+void windowSizeCallback(GLFWwindow* window)
+{
+  glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+}

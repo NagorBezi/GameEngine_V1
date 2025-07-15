@@ -1,4 +1,4 @@
-#include "../headers/initWindow.h"
+#include "../headers/Window.h"
 #include "../headers/shaders.h"
 #include "../headers/objects.h"
 #include "../headers/textures.h"
@@ -51,7 +51,7 @@ int main()
 
   working = isShaderProgramOK(ourShader);
 
-  unsigned int texture = genTexture("textures/sigil.png");
+  unsigned int texture = genTexture("games/textures/sigil.png");
 
   Object rect (verts, 32, indices, 6, true, 1);
 
@@ -59,6 +59,8 @@ int main()
   {
     return -1;
   }
+
+  windowSizeCallback(window);
 
   // MAIN LOOP
   while (!glfwWindowShouldClose(window))
