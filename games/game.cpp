@@ -2,6 +2,7 @@
 #include "../headers/shaders.h"
 #include "../headers/objects.h"
 #include "../headers/textures.h"
+#include "../headers/input.h"
 
 
 bool working = true;
@@ -38,6 +39,14 @@ void init()
   setTexFilterMethod(2);
 }
 
+void input()
+{
+  if (isKeyPressed(window, GLFW_KEY_ESCAPE))
+  {
+    glfwSetWindowShouldClose(window, true);
+  }
+}
+
 int main()
 {
   // INIT FUNCTION
@@ -65,6 +74,8 @@ int main()
   // MAIN LOOP
   while (!glfwWindowShouldClose(window))
   {
+    input();
+
     bg_color(0.0f, 0.0f, 0.0f, 1.0f);
 
     rect.render_T(ourShader, texture);
