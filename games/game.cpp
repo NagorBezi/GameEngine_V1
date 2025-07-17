@@ -40,7 +40,7 @@ void init()
 
 void input()
 {
-  if (isKeyPressed(window, GLFW_KEY_ESCAPE))
+  if ( isKeyPressed(window, GLFW_KEY_ESCAPE) )
   {
     glfwSetWindowShouldClose(window, true);
   }
