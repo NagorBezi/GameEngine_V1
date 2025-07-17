@@ -63,6 +63,13 @@ int main()
 
   Object rect (verts, 32, indices, 6, true, 1);
 
+	// Initiatal position
+	rect.render_T(ourShader, texture);
+
+	rect.scale(ourShader, glm::vec3(1.0f, 1.0f, 0.0f));
+	rect.rotate(ourShader, 0.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	rect.translate(ourShader, glm::vec3(0.0f, 0.0f, 0.0f));
+
   if ( !working )
   {
     return -1;
@@ -78,10 +85,8 @@ int main()
     bg_color(0.0f, 0.0f, 0.0f, 1.0f);
 
     rect.render_T(ourShader, texture);
-
-		rect.scale(ourShader, glm::vec3(2.0f, 2.0f, 0.0f));
-		rect.rotate(ourShader, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-		rect.translate(ourShader, glm::vec3(0.2f, 0.2f, 0.0f));
+		
+		rect.rotate(ourShader, glfwGetTime()*100, glm::vec3(0.0f, 0.0f, 1.0f));
 
     glfwSwapBuffers(window);
     glfwPollEvents();
