@@ -14,10 +14,10 @@ GLFWwindow* window = newWindow(SCREEN_HEIGHT, SCREEN_WIDTH, Title);
 
 float verts[] =
 {
-  -0.5f,  0.5f,  0.0f,   1.0f, 0.5f, 0.5f,   0.0f, 1.0f,
-  -0.5f, -0.5f,  0.0f,   0.5f, 1.0f, 0.5f,   0.0f, 0.0f,
-   0.5f, -0.5f,  0.0f,   0.5f, 0.5f, 1.0f,   1.0f, 0.0f,
-   0.5f,  0.5f,  0.0f,   1.0f, 0.5f, 1.0f,   1.0f, 1.0f
+  -0.5f,  0.5f,  0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
+  -0.5f, -0.5f,  0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f,
+   0.5f, -0.5f,  0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
+   0.5f,  0.5f,  0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f
 };
 
 unsigned int indices[] = 
@@ -78,6 +78,10 @@ int main()
     bg_color(0.0f, 0.0f, 0.0f, 1.0f);
 
     rect.render_T(ourShader, texture);
+
+		rect.scale(ourShader, glm::vec3(2.0f, 2.0f, 0.0f));
+		rect.rotate(ourShader, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+		rect.translate(ourShader, glm::vec3(0.2f, 0.2f, 0.0f));
 
     glfwSwapBuffers(window);
     glfwPollEvents();

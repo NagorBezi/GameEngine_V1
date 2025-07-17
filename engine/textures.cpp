@@ -53,6 +53,8 @@ void setTexFilterMethod (int method)
 
 unsigned int genTexture (const char* image_path)
 {
+	stbi_set_flip_vertically_on_load(true);
+	
   int width, height, nrChannels;
   unsigned char* data = stbi_load(image_path, &width, &height, &nrChannels, 0);
   
