@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-GLFWwindow* newWindow(const unsigned int SCREEN_HEIGHT, const unsigned int SCREEN_WIDTH, const char* Title)
+GLFWwindow* newWindow(const unsigned int SCREEN_WIDTH, const unsigned int SCREEN_HEIGHT, const char* Title)
 {
 
   glfwInit();
@@ -12,7 +12,7 @@ GLFWwindow* newWindow(const unsigned int SCREEN_HEIGHT, const unsigned int SCREE
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  GLFWwindow* window = glfwCreateWindow(SCREEN_HEIGHT, SCREEN_WIDTH, Title, NULL, NULL);
+  GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, Title, NULL, NULL);
 
   return window;
 

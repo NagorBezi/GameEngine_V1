@@ -5,19 +5,18 @@
 #include "../headers/textures.h"
 #include "../headers/input.h"
 
+#include <cmath>
+
 
 bool working = true;
 
 
-const unsigned int SCREEN_HEIGHT=900, SCREEN_WIDTH=900;
+const unsigned int SCREEN_WIDTH=1200, SCREEN_HEIGHT=900;
 const char* Title = "TEST GAME";
-GLFWwindow* window = newWindow(SCREEN_HEIGHT, SCREEN_WIDTH, Title);
+GLFWwindow* window = newWindow(SCREEN_WIDTH, SCREEN_HEIGHT, Title);
 
 
-float fov = 45.0;
-glm::mat4 model = glm::mat4(1.0f);
-glm::mat4 view = glm::mat4(1.0f);
-glm::mat4 projection = newProjMat(fov, SCREEN_WIDTH, SCREEN_HEIGHT, 0.1f, 100.0f);
+float fov = 50.0;
 
 
 float verts[192] =
@@ -73,10 +72,15 @@ unsigned int indices[36] =
 	20, 21, 22,
 	20, 22, 23
 };
+glm::vec3 cubePositions[2]
+{
+	glm::vec3 (-0.8f, -0.6f, -0.6f),
+	glm::vec3 ( 0.4f,  0.0f,  0.5f)
+};
 
 
 unsigned int ourShader;
-Object rect;
+Object cube;
 
 
 void init()
@@ -86,9 +90,6 @@ void init()
   useWindow(window);
   working = isWindowOK(window);
 
-	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-	model = global_rotate(model, -55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-
 	ourShader = newShaderProgram(
   	newVertexShader("shader/shader1.vs"),
   	newFragmentShader("shader/shader2.fs")
@@ -96,7 +97,10 @@ void init()
 
   working = isShaderProgramOK(ourShader);
 
-	rect.init(verts, 192, indices, 36, true, 1);
+	cube.init(verts, 192, indices, 36, true, 1);
+
+	glEnable(GL_DEPTH_TEST);
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
   setTexWrapMethod(2);
   setTexFilterMethod(1);
@@ -114,7 +118,6 @@ int main()
 {
   // INIT FUNCTION
   init();
-	glEnable(GL_DEPTH_TEST);
 
   // PRE-MAIN LOOP
   unsigned int texture = genTexture("games/textures/crate-texture.jpg");
@@ -133,9 +136,20 @@ int main()
     bg_color(0.0f, 0.0f, 0.25f, 1.0f);
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-    rect.render_T(ourShader, texture);
+		glm::mat4 view = glm::mat4(1.0f);
+		glm::mat4 projection = newProjMat(fov, SCREEN_WIDTH, SCREEN_HEIGHT, 0.1f, 100.0f);
 
-		updateSpaces(model, view, projection, ourShader);
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+		for ( int i = 0; i < 2; i++)
+		{
+			glm::mat4 model = glm::mat4(1.0f);
+			model = global_translate (model, cubePositions[i]);
+			float angle = 20*i;
+			model = global_rotate (model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
+			updateSpaces(model, view, projection, ourShader);
+			cube.render_T(ourShader, texture);
+		}
 
     glfwSwapBuffers(window);
     glfwPollEvents();
