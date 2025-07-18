@@ -9,7 +9,7 @@
 bool working = true;
 
 
-const unsigned int SCREEN_HEIGHT=1200, SCREEN_WIDTH=900;
+const unsigned int SCREEN_HEIGHT=900, SCREEN_WIDTH=900;
 const char* Title = "TEST GAME";
 GLFWwindow* window = newWindow(SCREEN_HEIGHT, SCREEN_WIDTH, Title);
 
@@ -45,9 +45,8 @@ void init()
   useWindow(window);
   working = isWindowOK(window);
 
-	view = glm::translate (view, glm::vec3(0.0f, 0.0f, -3.0f));
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 	model = global_rotate(model, -55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-
 
 	ourShader = newShaderProgram(
   	newVertexShader("shader/shader1.vs"),
@@ -76,7 +75,7 @@ int main()
   init();
 
   // PRE-MAIN LOOP
-  unsigned int texture = genTexture("games/textures/sigil.png");
+  unsigned int texture = genTexture("games/textures/crate-texture.jpg");
 
   if ( !working )
   {
@@ -89,7 +88,7 @@ int main()
   while (!glfwWindowShouldClose(window))
   {
     input();
-    bg_color(1.0f, 1.0f, 1.0f, 1.0f);
+    bg_color(0.0f, 0.0f, 0.25f, 1.0f);
 
     rect.render_T(ourShader, texture);
 
