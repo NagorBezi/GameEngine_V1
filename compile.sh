@@ -3,6 +3,7 @@
 g++ glad.c\
   games/game.cpp\
   engine/Window.cpp\
+	engine/Spaces.cpp\
   engine/textures.cpp\
 	engine/shaders.cpp\
   engine/input.cpp\

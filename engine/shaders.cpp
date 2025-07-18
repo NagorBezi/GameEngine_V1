@@ -123,27 +123,3 @@ bool isShaderProgramOK(unsigned int shaderProgram)
 
   return true;
 }
-
-void scale (unsigned int shaderProgram, glm::vec3 S_vector)
-{
-	glUseProgram(shaderProgram);
-	glm::mat4 scale = glm::mat4(1.0f);
-	scale = glm::scale(scale, S_vector);
-	glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "scale"), 1, GL_FALSE, glm::value_ptr(scale));
-}
-
-void rotate (unsigned int shaderProgram, float amount, glm::vec3 axis)
-{
-	glUseProgram(shaderProgram);
-	glm::mat4 rotate = glm::mat4(1.0f);
-	rotate = glm::rotate(rotate, glm::radians(amount), axis);
-	glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "rotate"), 1, GL_FALSE, glm::value_ptr(rotate));
-}
-
-void translate (unsigned int shaderProgram, glm::vec3 T_vector)
-{
-	glUseProgram(shaderProgram);
-	glm::mat4 trans = glm::mat4(1.0f);
-	trans = glm::translate (trans, T_vector);
-	glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "translate"), 1, GL_FALSE, glm::value_ptr(trans));
-}

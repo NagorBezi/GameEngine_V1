@@ -6,13 +6,13 @@ layout ( location = 2 ) in vec2 aTexCoord;
 out vec3 ourColor;
 out vec2 ourTexCoord;
 
-uniform mat4 scale;
-uniform mat4 rotate;
-uniform mat4 translate;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
 
 void main()
 {
-  gl_Position = scale * rotate * translate * vec4(aPos , 1.0f);
+  gl_Position = projection * view * model * vec4(aPos , 1.0f);
   ourColor = aColor;
   ourTexCoord = aTexCoord;
 }
