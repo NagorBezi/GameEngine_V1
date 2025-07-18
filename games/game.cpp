@@ -1,6 +1,6 @@
 #include "../headers/Window.h"
 #include "../headers/shaders.h"
-#include "../headers/objects.h"
+#include "../headers/objectClass.h"
 #include "../headers/textures.h"
 #include "../headers/input.h"
 
@@ -12,7 +12,7 @@ const char* Title = "TEST GAME";
 
 GLFWwindow* window = newWindow(SCREEN_HEIGHT, SCREEN_WIDTH, Title);
 
-float verts[] =
+float verts[32] =
 {
   -0.5f,  0.5f,  0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
   -0.5f, -0.5f,  0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f,
@@ -20,12 +20,15 @@ float verts[] =
    0.5f,  0.5f,  0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f
 };
 
-unsigned int indices[] = 
+unsigned int indices[6] = 
 {
   0, 1, 2,
 	0, 2, 3
 };
 
+unsigned int ourShader;
+
+Object rect;
 
 void init()
 {
@@ -33,6 +36,19 @@ void init()
 
   useWindow(window);
   working = isWindowOK(window);
+
+	ourShader = newShaderProgram(
+  	newVertexShader("shader/shader1.vs"),
+  	newFragmentShader("shader/shader2.fs")
+	);
+
+  working = isShaderProgramOK(ourShader);
+
+	rect.init(verts, 32, indices, 6, true, 1);
+
+	scale(ourShader, glm::vec3(2.0f, 2.0f, 1.0f));
+	rotate(ourShader, 0.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	translate(ourShader, glm::vec3(0.2f, 0.2f, 0.0f));
 
   setTexWrapMethod(1);
   setTexFilterMethod(2);
@@ -52,23 +68,7 @@ int main()
   init();
 
   // PRE-MAIN LOOP
-	unsigned int ourShader = newShaderProgram(
-  	newVertexShader("shader/shader1.vs"),
-  	newFragmentShader("shader/shader2.fs")
-	);
-
-  working = isShaderProgramOK(ourShader);
-
   unsigned int texture = genTexture("games/textures/sigil.png");
-
-  Object rect (verts, 32, indices, 6, true, 1);
-
-	// Initiatal position
-	rect.render_T(ourShader, texture);
-
-	rect.scale(ourShader, glm::vec3(1.0f, 1.0f, 0.0f));
-	rect.rotate(ourShader, 0.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-	rect.translate(ourShader, glm::vec3(0.0f, 0.0f, 0.0f));
 
   if ( !working )
   {
@@ -85,8 +85,6 @@ int main()
     bg_color(0.0f, 0.0f, 0.0f, 1.0f);
 
     rect.render_T(ourShader, texture);
-		
-		rect.rotate(ourShader, glfwGetTime()*100, glm::vec3(0.0f, 0.0f, 1.0f));
 
     glfwSwapBuffers(window);
     glfwPollEvents();
